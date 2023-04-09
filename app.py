@@ -35,6 +35,7 @@ def ikdc():
 
 
 
+
 #########404######
 @app.errorhandler(404)
 def page_not_found(e):
@@ -90,7 +91,9 @@ def send_message():
 
     return render_template('success.html')
 ##########################################################################
-
+@app.route('/glenoid_track_calculator')
+def glenoid_track_calculator():
+    return render_template('glenoid_track_calculator.html')
 ######################### Glenoid Track Calculator
 
 ##############################################################

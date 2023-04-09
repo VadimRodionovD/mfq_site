@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block title %}FAAM{% endblock %}
+{% block content %}
+
+
+<style>
+    p {
+        text-align: center;
+        font-size: 18px;
+
+    }
+
+    #accordion {
+        text-align: center;
+    }
+
+    #question {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+    .exercise-table {
+        width: 100%;
+        margin-bottom: 20px;
+        overflow-x: auto;
+
+    }
+
+    .exercise-table th,
+    .exercise-table td {
+        padding: 8px;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid #ddd;
+    }
+
+    .exercise-table th {
+        background-color: #f2f2f2;
+    }
+
+    .exercise-table td label {
+        display: inline-block;
+        background-color: #fff;
+        color: #0d6efd;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 10px 20px;
+        border: 1px solid #337ab7;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .exercise-table td label:hover {
+        background-color: #337ab7;
+        color: #fff;
+    }
+
+    .exercise-table td input[type="radio"] {
+        display: none;
+    }
+
+    .exercise-table td input[type="radio"]:checked+label {
+        background-color: #337ab7;
+        color: #fff;
+        border-color: #337ab7;
+    }
+
+    .exercise-table::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    .exercise-table::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .exercise-table::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 20px;
+        border: 3px solid #f1f1f1;
+    }
+
+    .exercise-table::-webkit-scrollbar-thumb:hover {
+        background-color: #aaa;
+    }
+
+
+
+
+
+
+    /* #### */
+    /* стили для контейнера группы кнопок */
+    .btn-group {
+        display: block;
+        margin-bottom: 15px;
+
+    }
+
+    /* стили для каждой кнопки */
+    .btn-group input[type="radio"] {
+        display: none;
+        /* скрываем оригинальный элемент input */
+    }
+
+    .btn-group label {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        box-sizing: border-box;
+        white-space: normal;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
+
+    /* стили для выбранной кнопки */
+    .btn-group input[type="radio"]:checked+label {
+        background-color: #337ab7;
+        border-color: #2e6da4;
+        color: #fff;
+    }
+
+    /* стили для первой кнопки */
+    .btn-group label:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    /* стили для последней кнопки */
+    .btn-group label:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    /* стили для всех кнопок, кроме первой и последней */
+    .btn-group label:not(:first-child):not(:last-child) {
+        border-radius: 0;
+        margin-left: -1px;
+    }
+
+    /* стили для группы кнопок с вертикальным расположением */
+    .btn-group-vertical label {
+        margin-bottom: -1px;
+    }
+
+    /* стили для группы кнопок с горизонтальным расположением */
+    .btn-group-horizontal label {
+        margin-right: -1px;
+    }
+
+    #result {
+        text-align: left;
+        margin: auto;
+        max-width: 500px;
+        /* Желаемая максимальная ширина блока */
+    }
+
+    .body {
+        color: black;
+        font-weight: bold;
+    }
+
+    .container {
+        max-width: 960px;
+        /* задаем максимальную ширину контейнера */
+        margin: 0 auto;
+        /* центрируем контейнер */
+        text-align: center;
+        /* выравниваем содержимое контейнера по центру */
+    }
+
+
+
+    /* Для разрешения 375px */
+    @media (min-width: 360px) and (max-width: 767px) {
+        .container {
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+
+        }
+
+
+
+        .survey-form {
+
+            /* задаем максимальную ширину контейнера */
+            margin: 10% auto;
+            /* центрируем контейнер */
+            /* text-align: center; */
+            /* выравниваем содержимое контейнера по центру */
+            max-width: 100%;
+            /* word-wrap: break-word; */
+        }
+
+        .hisfull_about_area {
+            text-align: center;
+            padding: 10px 0px 10px;
+        }
+
+        .survey-form {
+            padding: 5px;
+        }
+
+        h1,
+        h2,
+        p {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        h4 {
+            font-size: 13px;
+        }
+
+        .exercise-table td label {
+            font-size: 14px;
+        }
+
+        .btn-group label {
+            font-size: 10px;
+            padding: 5px 10px;
+            text-align: left;
+        }
+
+        #result {
+            max-width: 100%;
+            margin: 0;
+        }
+
+        .btn {
+
+            font-size: 10px;
+        }
+
+        .horizontal-scroll-wrapper {
+            width: auto;
+            height: auto;
+            overflow-y: auto;
+            overflow-x: auto;
+
+        }
+
+        .horizontal-scroll-wrapper>div {
+            width: 100px;
+            height: 100px;
+
+
+        }
+
+        .horizontal-scroll-wrapper {
+            transform: rotate(-360deg);
+            transform-origin: right top;
+
+        }
+
+        .horizontal-scroll-wrapper>div {
+            transform: rotate(90deg);
+            transform-origin: right top;
+
+        }
+
+        table {
+
+            border-collapse: collapse;
+            border-spacing: 0;
+            font-size: 12px;
+            line-height: 2;
+            margin: 0 0 20px;
+            width: 100%;
+            color: black;
+        }
+
+        .photo-container {
+            display: none;
+        }
+
+        .myForm_ikdc_name {
+            padding-right: 20px;
+        }
+
+        #myForm_ikdc_name .fon {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            /* опционально, чтобы выровнять по вертикали */
+        }
+
+        #myForm_ikdc_name .photo-container {
+            flex: 1;
+        }
+
+        #myForm_ikdc_name .other-container {
+            width: 40%;
+            /* задайте нужную ширину */
+        }
+
+        /* Стили для ползунка */
+        #myForm_ikdc_name {
+            /* display: flex; */
+            justify-content: center;
+        }
+
+        .myForm_ikdc_name {
+            padding-right: 20px;
+        }
+
+        #myForm_ikdc_name .fon {
+            /* display: flex; */
+            /* flex-direction: row; */
+            align-items: center;
+            /* опционально, чтобы выровнять по вертикали */
+        }
+
+        #myForm_ikdc_name .photo-container {
+            flex: 1;
+        }
+
+        #myForm_ikdc_name .other-container {
+            width: 40%;
+            /* задайте нужную ширину */
+        }
+
+        /* Стили для ползунка */
+        .slider-container {
+            /* display: flex; */
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .slider {
+            width: 300px;
+            margin-bottom: 10px;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .slider-labels span {
+            width: 25px;
+            text-align: center;
+        }
+
+        .slider-labels2 {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .slider-labels3 {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+
+    }
+
+    /* Медиа-запрос для устройств с шириной экрана больше 1024px */
+
+
+    @media (min-width: 768px) and (max-width: 4000px) {
+        .hisfull_about_area {
+            text-align: center;
+            padding: 18px 0px 10px;
+        }
+
+        .survey-form {
+            max-width: 960px;
+            /* задаем максимальную ширину контейнера */
+            margin: 0 auto;
+            /* центрируем контейнер */
+            text-align: center;
+            /* выравниваем содержимое контейнера по центру */
+        }
+
+
+
+
+
+        .horizontal-scroll-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: auto;
+
+        }
+
+        .horizontal-scroll-wrapper>div {
+            width: 100px;
+            height: 100px;
+
+
+        }
+
+        .horizontal-scroll-wrapper {
+            transform: rotate(-360deg);
+            transform-origin: right top;
+
+        }
+
+        .horizontal-scroll-wrapper>div {
+            transform: rotate(90deg);
+            transform-origin: right top;
+
+        }
+
+        table {
+
+            border-collapse: collapse;
+            border-spacing: 0;
+            font-size: 12px;
+            line-height: 2;
+            margin: 0 0 20px;
+            width: 100%;
+            color: black;
+        }
+
+        .exercise-table th,
+        .exercise-table td {
+            padding-top: 10px;
+            padding-right: 8px;
+            padding-bottom: 8px;
+            padding-left: 8px;
+        }
+
+        #date_ikdc_br {
+            display: none;
+        }
+
+        #date_br {
+            display: none;
+        }
+
+        #myForm_ikdc_name .fon {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            /* опционально, чтобы выровнять по вертикали */
+        }
+
+        #myForm_ikdc_name .photo-container {
+            flex: 1;
+        }
+
+        #myForm_ikdc_name .other-container {
+            width: 40%;
+            /* задайте нужную ширину */
+        }
+
+        /* Стили для ползунка */
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .slider {
+            width: 300px;
+            margin-bottom: 10px;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .slider-labels span {
+            width: 25px;
+            text-align: center;
+        }
+
+        .slider-labels2 {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .slider-labels3 {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+    }
+</style>
+
+
+<body>
+
+    <div class="breadcumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 txtc  text-center ccase">
+                    <div class="brpt">
+                        <h2>IKDC</h2>
+                    </div>
+                    <div class="breadcumb-inner">
+                        <ul>
+                            <li><a href="/">Главная</a></li>
+                            <li><i class="fas fa-angle-right"></i></li>
+                            <li>IKDC</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hisfull_about_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="survey-form">
+        <div class="ikdc_form">
+            <h1>Glenoid Track Calculator</h1>
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="false" aria-controls="collapseOne">
+                                О шкале
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            Первоначально опубликованный в 2005 году в журнале Foot and Ankle International , Измеритель
+                            способностей стопы и голеностопного сустава (FAAM) был разработан для оценки физической
+                            функции людей с нарушениями опорно-двигательного аппарата голени, стопы и голеностопного
+                            сустава.
+                            The FAAM is a patient-completed instrument that consists of an “Activities of Daily Living”
+                            subscale (21 scored items) and a “Sports” subscale (7 scored items) in which the response
+                            options are presented as 5-point Likert scales (range 4 to 0). Scores for each subscale
+                            range from 0% (least function) to 100% (most function).
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                                aria-expanded="false" aria-controls="collapseTwo">
+                                Вспомогательная литература
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                            Оригинальная литература:
+                            Мартин, Роброй Л. и др. «Доказательства достоверности измерения способности стопы и
+                            голеностопного сустава (FAAM)». Foot [& Ankle International 26.11 (2005): 968-983.
+                            Дополнительная литература:
+                            Мартин, Роброй Л. и Джеймс Дж. Ирганг. «Обзор инструментов для самооценки результатов для
+                            стопы и лодыжки». Журнал ортопедической и спортивной физиотерапии 37.2 (2007): 72-84.
+                            Косби, Николь Л. и Джей Хертел. «Клиническая оценка результатов травм голеностопного
+                            сустава: сценарий с использованием измерения способности стопы и голеностопного сустава».
+                            Журнал спортивной реабилитации 20.1 (2011): 89-99.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                                aria-expanded="false" aria-controls="collapseThree">
+                                О разработчике партитуры
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body">
+                            Доктор Джесси Ван Сверинген является адъюнкт-профессором кафедры физиотерапии Школы
+                            здравоохранения и реабилитации Университета Питтсбурга и возглавляет исследовательский
+                            комитет Академии гериатрии Американской ассоциации физиотерапии.
+                            Чтобы просмотреть его публикации, посетите PubMed .
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <form id="myForm_ikdc_name">
+                <div class="fon">
+                    <div class="photo-container">
+                        <img src="static/images/glenoid.png" alt="Photo">
+                    </div>
+                    <div class="other-container">
+                        <h2>Glenoid Track Calculator</h2><br>
+                        <div class="slider-container">
+                            <label for="glb_nativ">Native Glenoid Width (mm)</label>
+                            <input type="range" min="0" max="35" step="0.1" value="0" class="slider" id="glb_nativ">
+                            <output id="glb_nativ_value">0</output>
+
+                            <div class="slider-labels">
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_nativ').value = 0;">0</span>
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_nativ').value = 10;">10</span>
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_nativ').value = 20;">20</span>
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_nativ').value = 30;">30</span>
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_nativ').value = 35;">35</span>
+                            </div>
+
+                            <label for="glb_anterior">Anterior Glenoid Bone Loss (mm)</label>
+                            <input type="range" min="0" max="30" step="0.1" value="0" class="slider" id="glb_anterior">
+                            <output id="glb_anterior_value">0</output>
+                            <div class="slider-labels2">
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_anterior').value = 0;">0</span>
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_anterior').value = 10;">10</span>
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_anterior').value = 20;">20</span>
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_anterior').value = 30;">30</span>
+                            </div>
+
+
+                            <label for="glb_hill">Hill-Sachs Interval (HSI) Width (mm)</label>
+                            <input type="range" min="0" max="30" step="0.1" value="0" class="slider" id="glb_hill">
+                            <output id="glb_hill_value">0</output>
+
+                            <div class="slider-labels3">
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_hill').value = 0;">0</span>
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_hill').value = 10;">10</span>
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_hill').value = 20;">20</span>
+                                <span style="cursor: pointer;"
+                                    onclick="document.getElementById('glb_hill').value = 30;">30</span>
+                            </div>
+                        </div>
+                        <h2>Percent Glenoid Bone Loss</h2>
+                        <output id="percent_loss_value"></output>
+                        <h2>Glenoid Track Width (mm)</h2>
+                        <output id="glenoid_track_value"></output>
+                        <h2>Glenoid Track: 0="On-Track" (Non-Engaging), 99="Off-Track" (Engaging)</h2>
+                        <output id="glenoid_track_value1"></output>
+                        <!-- HTML-разметка для отображения значения ползунка -->
+
+
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</body>
+<script>
+    // Обработка событий для главного ползунка
+    const slider = document.getElementById('glb_nativ');
+    const output = document.getElementById('glb_nativ_value');
+    const labels = document.querySelectorAll('.slider-labels span');
+    let nativeWidth, anteriorLoss;
+
+    slider.oninput = function () {
+        output.value = this.value;
+        nativeWidth = this.value;
+        calculate();
+    };
+
+    labels.forEach(function (label) {
+        label.onclick = function () {
+            slider.value = this.textContent;
+            output.value = this.textContent;
+            nativeWidth = this.textContent;
+            calculate();
+        };
+    });
+
+    // Обработка событий для дополнительного ползунка
+    const slider2 = document.getElementById('glb_anterior');
+    const output2 = document.getElementById('glb_anterior_value');
+    const labels2 = document.querySelectorAll('.slider-labels2 span');
+
+    slider2.oninput = function () {
+        output2.value = this.value;
+        anteriorLoss = this.value;
+        calculate();
+    };
+
+    labels2.forEach(function (label) {
+        label.onclick = function () {
+            slider2.value = this.textContent;
+            output2.value = this.textContent;
+            anteriorLoss = this.textContent;
+            calculate();
+        };
+    });
+
+    // Обработка событий для дополнительного ползунка2
+    const slider3 = document.getElementById('glb_hill');
+    const output3 = document.getElementById('glb_hill_value');
+    const labels3 = document.querySelectorAll('.slider-labels3 span');
+
+    slider3.oninput = function () {
+        output3.value = this.value;
+        calculate();
+    };
+
+    labels3.forEach(function (label) {
+        label.onclick = function () {
+            slider3.value = this.textContent;
+            output3.value = this.textContent;
+            calculate();
+        };
+    });
+
+    // Рассчитываем Percent Glenoid Bone Loss и Glenoid Track
+    function calculate() {
+
+        const percentLoss = Math.round((anteriorLoss / nativeWidth) * 100) / 100;
+        const glenoidTrack = Math.round(0.83 * nativeWidth - anteriorLoss);
+
+        const glenoidTrackValue = document.getElementById('glenoid_track_value1');
+
+        if (glenoidTrack >= 0 && glenoidTrack <= 99) {
+            glenoidTrackValue.textContent = `${glenoidTrack}="On-Track" (Non-Engaging)`;
+        } else {
+            glenoidTrackValue.textContent = `${glenoidTrack}="Off-Track" (Engaging)`;
+        }
+        document.getElementById('percent_loss_value').textContent = percentLoss.toFixed(2);
+        document.getElementById('glenoid_track_value').textContent = glenoidTrack.toFixed(2);
+    }
+
+</script>
+
+
+{% endblock %}
